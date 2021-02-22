@@ -1,0 +1,92 @@
+{
+  "allowHttpBackend": false,
+  "backendCommand": "",
+  "backendFolderName": "",
+  "certificateExceptions": [],
+  "extensionViews": [
+    {
+      "channelId": "72926898",
+      "configurationAnchor": "component",
+      "displayChannelName": "logigo",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "1",
+      "isPopout": false,
+      "label": "component",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "component",
+      "viewerType": "Broadcaster"
+    }
+  ],
+  "manifest": {
+    "anchor": "component",
+    "assetUrls": [],
+    "authorName": "logigo",
+    "bitsEnabled": false,
+    "canInstall": true,
+    "configUrl": "https://localhost:8080/config.html",
+    "configurationLocation": "none",
+    "description": "",
+    "eulaTosUrl": "",
+    "hasChatSupport": false,
+    "iconUrl": "",
+    "iconUrls": {},
+    "id": "6hwnzmge7xnv88rd89ixp0ru3rhd37",
+    "installationCount": -42,
+    "liveConfigUrl": "",
+    "name": "catJAM",
+    "panelHeight": 0,
+    "privacyPolicyUrl": "",
+    "requestIdentityLink": false,
+    "requiredBroadcasterAbilities": [],
+    "screenshotUrls": [],
+    "sku": "",
+    "state": "Testing",
+    "subscriptionsSupportLevel": "none",
+    "summary": "Realtime music interaction",
+    "supportEmail": "",
+    "vendorCode": "",
+    "version": "0.0.1",
+    "viewerSummary": "",
+    "viewerUrl": "",
+    "viewerUrls": {
+      "component": "https://localhost:8080/video_component.html"
+    },
+    "views": {
+      "component": {
+        "viewerUrl": "https://localhost:8080/video_component.html",
+        "aspectWidth": 0,
+        "aspectHeight": 0,
+        "aspectRatioX": 300,
+        "aspectRatioY": 200,
+        "scalePixels": 1024,
+        "targetHeight": 4000,
+        "size": 0,
+        "zoom": false,
+        "zoomPixels": 0,
+        "canLinkExternalContent": false,
+        "autoScale": true
+      },
+      "config": {
+        "viewerUrl": "https://localhost:8080/config.html",
+        "canLinkExternalContent": false
+      }
+    },
+    "whitelistedConfigUrls": [],
+    "whitelistedPanelUrls": []
+  },
+  "frontendCommand": "npm run start",
+  "frontendFolderName": "catjam\\public",
+  "name": "catJAM",
+  "usingRandomFrontendHostingPort": false,
+  "version": 3
+}

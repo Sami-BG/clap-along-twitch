@@ -1,0 +1,71 @@
+.title-text {
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: 'Inria Sans', sans-serif;
+    align-items: center;
+    font-size: 60px;
+    padding-bottom: 15px;
+}
+
+.middle-quartile {
+    background-color: darkgrey;
+    padding: 50px;
+}
+
+#vibe {
+    width: 50%;
+    height: 60%;
+    background: #161616;
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 15px #000000;
+    border-radius: 14px;
+    font-size: 20px;
+    font-family: 'Inria Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    transition: 0.2s;
+}
+#vibe:hover {
+    width: 53%;
+    height: 64%;
+    border-radius: 21px;
+}
+
+#root {
+    background-color: #C4C4C4;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.top-quartile {
+    height: 25%;
+    width: 100%;
+    display: grid;
+    justify-items: center;
+}
+
+.middle-quartile {
+    height: 45%;
+    width: 100%;
+}
+
+.bottom-quartile {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
