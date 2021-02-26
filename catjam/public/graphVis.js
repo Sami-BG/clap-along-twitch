@@ -68,7 +68,7 @@ function update(poll) {
     y.domain([
         0,
         d3.max(poll, d => {
-            return d.votes + 200;
+            return d.votes + 5;
         }),
     ]);
 
