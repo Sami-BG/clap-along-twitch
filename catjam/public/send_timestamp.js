@@ -1,5 +1,7 @@
 function sendTimeToServer() {
     var time = new Date();
+    //TODO : add stream time to request.
+
     // This is the port where we will run our web server
     const port = 4000;
     console.log('sendTimeToServer called');
