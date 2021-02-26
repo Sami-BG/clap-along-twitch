@@ -34,23 +34,23 @@ function updatePoll() {
 const poll = [
     {
         name: '-4',
-        votes: 100,
+        votes: 0,
     },
     {
         name: '-3',
-        votes: 70,
+        votes: 0,
     },
     {
         name: '-2',
-        votes: 250,
+        votes: 0,
     },
     {
         name: '-1',
-        votes: 689,
+        votes: 0,
     },
     {
         name: '0',
-        votes: 150,
+        votes: 0,
     },
 ];
 
@@ -60,6 +60,16 @@ app.use(cors());
 app.get('/poll', (req, res) => {
     res.json(poll);
     updatePoll();
+});
+
+function receivePing(req, res) {
+    console.log('Ping: ' + req);
+}
+
+app.post('/ping', (req, res) => {
+    res.send('Hello from res' + res)
+    req.send('Hello from req' + req)
+    receivePing(req);
 });
 
 app.set('port', process.env.PORT || 4000);
