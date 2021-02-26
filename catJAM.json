@@ -1,7 +1,7 @@
 {
   "allowHttpBackend": false,
-  "backendCommand": "",
-  "backendFolderName": "",
+  "backendCommand": "node server.js",
+  "backendFolderName": "catjam\\src",
   "certificateExceptions": [],
   "extensionViews": [
     {

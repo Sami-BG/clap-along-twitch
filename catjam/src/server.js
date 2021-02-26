@@ -33,23 +33,23 @@ function updatePoll() {
 
 const poll = [
     {
-        name: 'Chelsea',
+        name: '-4',
         votes: 100,
     },
     {
-        name: 'Arsenal',
+        name: '-3',
         votes: 70,
     },
     {
-        name: 'Liverpool',
+        name: '-2',
         votes: 250,
     },
     {
-        name: 'Manchester City',
+        name: '-1',
         votes: 689,
     },
     {
-        name: 'Manchester United',
+        name: '0',
         votes: 150,
     },
 ];

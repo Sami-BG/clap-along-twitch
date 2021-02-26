@@ -1,9 +1,8 @@
 // app.js
-
 // set the dimensions and margins of the graph
 const margin = { top: 20, right: 20, bottom: 30, left: 40 };
 const width = 960 - margin.left - margin.right;
-const height = 500 - margin.top - margin.bottom;
+const height = 250 - margin.top - margin.bottom;
 
 // set the ranges for the graph
 const x = d3
@@ -15,11 +14,11 @@ const y = d3.scaleLinear().range([height, 0]);
 
 // append the container for the graph to the page
 const container = d3
-    .select('body')
+    .select('div.graph-container')
     .append('div')
     .attr('class', 'container');
 
-container.append('h1').text('Who will win the 2018/19 Premier League Season?');
+container.append('h1').text('Vibe graph!');
 
 // append the svg object to the body of the page
 // append a 'group' element to 'svg'
@@ -113,8 +112,8 @@ function update(poll) {
     svg.select('.y-axis').call(d3.axisLeft(y));
 }
 
-const pusher = new Pusher('<your app key>', {
-    cluster: '<your app cluster>',
+const pusher = new Pusher('1e684d5e7daf1972c4f7', {
+    cluster: 'us2',
     encrypted: true,
 });
 
