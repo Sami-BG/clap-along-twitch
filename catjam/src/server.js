@@ -14,59 +14,19 @@ const pusher = new Pusher({
     encrypted: true,
 });
 
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function increment() {
-    const num = getRandomNumber(0, poll.length);
-    poll[num].votes += 20;
-}
-
-const poll = [
-    {
-        name: '0',
-        votes: 0,
-    },
-    {
-        name: '1',
-        votes: 0,
-    },
-    {
-        name: '2',
-        votes: 0,
-    },
-    {
-        name: '3',
-        votes: 0,
-    },
-    {
-        name: '4',
-        votes: 0,
-    },
-];
-
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/poll', (req, res) => {
-    res.json(poll);
-    updatePoll();
-    console.log('app.get poll, req:' + req +' res: ' + res);
-});
-
 function ping(time) {
-    var modulo_seconds = time % 5;
-    poll[modulo_seconds].votes += 1;
     pusher.trigger('poll-channel', 'update-poll', {
-        poll,
+        time,
     });
 }
 
 function receivePing(req, res) {
     console.log('Ping: ' + req.body);
-    var time = new Date(req.body['time']);
+    time = new Date(req.body['time']).getTime();
     ping(time);
 }
 
