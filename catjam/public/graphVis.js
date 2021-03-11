@@ -7,8 +7,6 @@ const height = 250 - margin.top - margin.bottom;
 
 google.charts.load('current', {'packages':['corechart']});
 
-const GraphUpdateInterval = 1000;
-const ViewWindow = [];
 const time = new Date().getTime();
 let updateCount = 0;
 const totalDisplayWidth = 25;
@@ -22,8 +20,24 @@ google.charts.setOnLoadCallback(() => {
 
     const options = {
         title: 'Vibe Graph',
-        hAxis: {title: 'Time',  titleTextStyle: {color: '#333'}, minValue: 0, maxValue: 10},
-        vAxis: {minValue: 0, maxValue: 10}
+        enableInteractivity: false,
+        chartArea: {width: '100%',
+                    height:'100%',
+                    top: '0',
+                    left: '0'},
+        hAxis: {titleTextStyle: {color: '#333'},
+                minorGridlines: {count: 0},
+                gridlines: {count: 0},
+                minValue: 0, maxValue: 10,
+                textPosition: 'none'},
+        vAxis: {minorGridlines: {count: 0},
+                gridlines: {count: 0},
+                minValue: -1, maxValue: 10,
+                textPosition: 'none',
+        },
+        curveType: 'function',
+        animation: {
+        }
     }
     const firstTime = new Date().getTime();
     const chart = drawChart(data, options);
