@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Pusher = require('pusher');
+const PingInterval = 200;
 
 const pusher = new Pusher({
     appId: process.env.PUSHER_APP_ID,
@@ -18,16 +19,23 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-function ping(time) {
+let pingAccumulator = 0;
+
+function flushPings() {
+    const time = new Date().getTime();
     pusher.trigger('poll-channel', 'update-poll', {
-        time,
+        'time': time,
+        'frequency': pingAccumulator
     });
+    pingAccumulator = 0;
 }
+
+setInterval(() => flushPings(), PingInterval);
 
 function receivePing(req, res) {
     console.log('Ping: ' + req.body);
-    time = new Date(req.body['time']).getTime();
-    ping(time);
+    // TODO: this randomization is temporary till we get hosted testing.
+    pingAccumulator += Math.floor(Math.random() * 10);
 }
 
 app.post('/ping', (req, res) => {

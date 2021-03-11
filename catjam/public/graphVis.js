@@ -7,25 +7,31 @@ const height = 250 - margin.top - margin.bottom;
 
 google.charts.load('current', {'packages':['corechart']});
 
-let global_time;
+const GraphUpdateInterval = 1000;
+const ViewWindow = [];
+const time = new Date().getTime();
+let updateCount = 0;
+const totalDisplayWidth = 25;
+
 google.charts.setOnLoadCallback(() => {
-    global_time = new Date().getTime();
-    let data = google.visualization.arrayToDataTable([
-        ['Time', 'Vibe'],
-        [0, 1]
-    ]);
+    const data = new google.visualization.DataTable();
+    data.addColumn('number', 'Time');
+    data.addColumn('number', 'Hype');
+    data.addRows(totalDisplayWidth);
+    const view = new google.visualization.DataView(data);
 
-    let chartOptions = {
+    const options = {
         title: 'Vibe Graph',
-        hAxis: {title: 'Time',  titleTextStyle: {color: '#333'}, minValue: 0},
-        vAxis: {minValue: 0, maxValue: 10},
-        animation:{ duration: 100, easing: 'out' }
+        hAxis: {title: 'Time',  titleTextStyle: {color: '#333'}, minValue: 0, maxValue: 10},
+        vAxis: {minValue: 0, maxValue: 10}
     }
-
-    drawChart(data, chartOptions);
+    const firstTime = new Date().getTime();
+    const chart = drawChart(data, options);
+    const channel = pusher.subscribe('poll-channel');
+    channel.bind('update-poll', (obj) => {
+        update(obj['time'], obj['frequency'], view, data, options, chart, firstTime);
+    });
 });
-
-
 
 const pusher = new Pusher('1e684d5e7daf1972c4f7', {
     cluster: 'us2',
@@ -35,21 +41,28 @@ const pusher = new Pusher('1e684d5e7daf1972c4f7', {
 function drawChart(data, options) {
     const chart = new google.visualization.LineChart(document.getElementById('graph'));
     chart.draw(data, options);
-    const channel = pusher.subscribe('poll-channel');
-    channel.bind('update-poll', ping => {
-        update(ping, chart, options, data);
-    });
+    return chart;
 }
 
-function update(time, chart, options, data) {
+// how do i stop having a hundred million arguments
+
+function update(pingTime, pingValue, view, data, options, chart, firstTime) {
     // Scale the range of the data in the x axis
-    const entry = decodeData(time);
+    updateCount++;
+    options.hAxis.minValue += 1;
+    if (updateCount > totalDisplayWidth) {
+        options.hAxis.maxValue += 1;
+    }
+    const entry = decodeData(pingTime, pingValue, firstTime);
+    if (data.getNumberOfRows() > totalDisplayWidth) {
+        data.removeRow(0);
+    }
     data.addRow(entry);
     chart.draw(data, options);
 }
 
-function decodeData(time) {
-    return [(time.time - global_time) / 1000, 1];
+function decodeData(time, pingValue, firstTime) {
+    return [updateCount, pingValue];
 }
 
 
