@@ -1,82 +1,90 @@
 // app.js
 // set the dimensions and margins of the graph
 
-const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+const margin = { top: 0, right: 0, bottom: 0, left: 0 };
 const width = 960 - margin.left - margin.right;
 const height = 250 - margin.top - margin.bottom;
 
-google.charts.load('current', {'packages':['corechart']});
-
 const time = new Date().getTime();
-let updateCount = 0;
-const totalDisplayWidth = 25;
+const totalDisplayWidth = 20;
+let updateCount = totalDisplayWidth;
 
-google.charts.setOnLoadCallback(() => {
-    const data = new google.visualization.DataTable();
-    data.addColumn('number', 'Time');
-    data.addColumn('number', 'Hype');
-    data.addRows(totalDisplayWidth);
-    const view = new google.visualization.DataView(data);
-
-    const options = {
-        title: 'Vibe Graph',
-        enableInteractivity: false,
-        chartArea: {width: '100%',
-                    height:'100%',
-                    top: '0',
-                    left: '0'},
-        hAxis: {titleTextStyle: {color: '#333'},
-                minorGridlines: {count: 0},
-                gridlines: {count: 0},
-                minValue: 0, maxValue: 10,
-                textPosition: 'none'},
-        vAxis: {minorGridlines: {count: 0},
-                gridlines: {count: 0},
-                minValue: -1, maxValue: 10,
-                textPosition: 'none',
-        },
-        curveType: 'function',
-        animation: {
-        }
+var trace1 = {
+    x: new Array(totalDisplayWidth),
+    y: new Array(totalDisplayWidth),
+    type: 'scatter',
+    line: {
+        color: 'rgb(0,0,0)',
+        width: 3,
+        shape: 'hvh'
     }
-    const firstTime = new Date().getTime();
-    const chart = drawChart(data, options);
-    const channel = pusher.subscribe('poll-channel');
-    channel.bind('update-poll', (obj) => {
-        update(obj['time'], obj['frequency'], view, data, options, chart, firstTime);
-    });
-});
+};
+
+var layout = {
+    title: '',
+    showlegend: false,
+    modebar: false,
+    xaxis: {
+        showgrid: false,
+        zeroline: false,
+        showline: false,
+        autotick: true,
+        ticks: '',
+        showticklabels: false
+    },
+    yaxis: {
+        showgrid: false,
+        zeroline: false,
+        showline: false,
+        autotick: true,
+        ticks: '',
+        showticklabels: false
+    },
+    margin: {
+        l: 0,
+        r: 0,
+        b: 0,
+        t: 0,
+        pad: 0
+    },
+    plot_bgcolor:"darkgrey",
+    hovermode: false
+};
+
+var config = {displayModeBar: false};
+var data = [trace1];
+
+
+graph = document.getElementById('graph');
+Plotly.newPlot(graph, data, layout, config);
+
 
 const pusher = new Pusher('1e684d5e7daf1972c4f7', {
     cluster: 'us2',
     encrypted: true,
 });
 
-function drawChart(data, options) {
-    const chart = new google.visualization.LineChart(document.getElementById('graph'));
-    chart.draw(data, options);
-    return chart;
-}
+const channel = pusher.subscribe('poll-channel');
+channel.bind('update-poll', (obj) => {
+    update(obj['time'], obj['frequency']);
+});
+
 
 // how do i stop having a hundred million arguments
 
-function update(pingTime, pingValue, view, data, options, chart, firstTime) {
+function update(pingTime, pingValue) {
     // Scale the range of the data in the x axis
     updateCount++;
-    options.hAxis.minValue += 1;
-    if (updateCount > totalDisplayWidth) {
-        options.hAxis.maxValue += 1;
-    }
-    const entry = decodeData(pingTime, pingValue, firstTime);
-    if (data.getNumberOfRows() > totalDisplayWidth) {
-        data.removeRow(0);
-    }
-    data.addRow(entry);
-    chart.draw(data, options);
+    const entry = decodeData(pingTime, pingValue);
+    const magnitude = entry[1];
+    Plotly.extendTraces(graph, { y: [[magnitude]], x: [[updateCount]] }, [0], totalDisplayWidth);
 }
 
-function decodeData(time, pingValue, firstTime) {
+function decodeData(time, pingValue) {
     return [updateCount, pingValue];
 }
 
+// interval = setInterval(() =>{
+//    update(new Date().getTime(),
+//    Math.floor(Math.random() * 10))}, 40);
 

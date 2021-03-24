@@ -10,12 +10,15 @@
     "cors": "^2.8.5",
     "d3": "^6.5.0",
     "dotenv": "^8.2.0",
+    "epoch-charting": "^0.8.4",
     "express": "^4.17.1",
     "http-server": "^0.12.3",
+    "plotly": "^1.0.6",
     "pusher": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
+    "rickshaw": "^1.7.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -41,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jquery": "^3.6.0"
   }
 }

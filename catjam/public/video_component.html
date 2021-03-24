@@ -8,6 +8,9 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>React Starter</title>
 </head>
 <body>
@@ -18,10 +21,9 @@
         </div>
     </div>
     <div class="middle-quartile">
-        <div class="graph-container"></div>
+        <div id="graph"></div>
         <script src="https://js.pusher.com/4.2/pusher.min.js"></script>
         <script src="graphVis.js"></script>
-        <div id="graph"></div>
     </div>
     <div class="bottom-quartile">
         <script src="send_timestamp.js"></script>

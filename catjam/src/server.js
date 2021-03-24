@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Pusher = require('pusher');
-const PingInterval = 200;
+const PingInterval = 50;
 
 const pusher = new Pusher({
     appId: process.env.PUSHER_APP_ID,
