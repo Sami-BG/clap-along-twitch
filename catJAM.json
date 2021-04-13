@@ -1,7 +1,7 @@
 {
   "allowHttpBackend": false,
   "backendCommand": "node server.js",
-  "backendFolderName": "catjam\\src",
+  "backendFolderName": "C:\\Users\\samib\\WebstormProjects\\catjam2\\clap-along-twitch\\catjam\\src",
   "certificateExceptions": [],
   "extensionViews": [
     {
@@ -85,7 +85,7 @@
     "whitelistedPanelUrls": []
   },
   "frontendCommand": "npm run start",
-  "frontendFolderName": "catjam\\public",
+  "frontendFolderName": "C:\\Users\\samib\\WebstormProjects\\catjam2\\clap-along-twitch\\catjam\\public",
   "name": "catJAM",
   "usingRandomFrontendHostingPort": false,
   "version": 3

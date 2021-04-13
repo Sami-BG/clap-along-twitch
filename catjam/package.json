@@ -46,6 +46,8 @@
     ]
   },
   "devDependencies": {
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.5.0"
   }
 }

@@ -12,8 +12,8 @@ async function sendTimeToServer() {
         },
         body: JSON.stringify({
                 time: time,
-                time_diff : get_time_diff(),
-                client_id : get_user_id()
+                // time_diff : get_time_diff(),
+                // client_id : get_user_id()
             })
         })
         .then(data => {
@@ -26,15 +26,15 @@ async function sendTimeToServer() {
 }
 
 function get_user_id() {
-    window.Twitch.ext.onAuthorized(function(auth) {
+    return window.Twitch.ext.onAuthorized(function(auth) {
         console.log('The channel ID is', auth.channelId);
-        return auth.userId
+        return auth.userId;
     });
 }
 
 function get_time_diff() {
-    window.Twitch.ext.onContext(function(contextCallback) {
-        return contextCallback.context.hlsLatencyBroadcaster
+    return window.Twitch.ext.onContext(function(contextCallback) {
+        return contextCallback.context.hlsLatencyBroadcaster;
     });
 
 }
