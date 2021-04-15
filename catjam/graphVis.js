@@ -1,9 +1,8 @@
 // app.js
 // set the dimensions and margins of the graph
-
 const margin = { top: 0, right: 0, bottom: 0, left: 0 };
-const width = 960 - margin.left - margin.right;
-const height = 250 - margin.top - margin.bottom;
+const width = 250;
+const height = 250;
 
 const time = new Date().getTime();
 const totalDisplayWidth = 20;
@@ -20,8 +19,12 @@ var trace1 = {
     }
 };
 
+var graphDiv = $('#graph');
+
 var layout = {
     title: '',
+    height: graphDiv.height() * 0.5,
+    width: graphDiv.width(),
     showlegend: false,
     modebar: false,
     xaxis: {
@@ -30,7 +33,8 @@ var layout = {
         showline: false,
         autotick: true,
         ticks: '',
-        showticklabels: false
+        showticklabels: false,
+        fixedrange: true
     },
     yaxis: {
         showgrid: false,
@@ -38,7 +42,8 @@ var layout = {
         showline: false,
         autotick: true,
         ticks: '',
-        showticklabels: false
+        showticklabels: false,
+        fixedrange: true
     },
     margin: {
         l: 0,
@@ -48,10 +53,10 @@ var layout = {
         pad: 0
     },
     plot_bgcolor:"darkgrey",
-    hovermode: false
+    hovermode: false,
 };
 
-var config = {displayModeBar: false};
+var config = {displayModeBar: false, responsive: true};
 var data = [trace1];
 
 
