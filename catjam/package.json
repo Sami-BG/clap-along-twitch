@@ -9,6 +9,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "d3": "^6.5.0",
+    "dot-env": "0.0.1",
     "dotenv": "^8.2.0",
     "epoch-charting": "^0.8.4",
     "express": "^4.17.1",

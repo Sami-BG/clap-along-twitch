@@ -1,12 +1,14 @@
 var latency = 0;
 var userId = 0;
+var channelId = 0;
 // Open ngrok then do ngrok.exe http 3000 to create a link that forwards to localhost 3000
-var ngrokLink = 'https://71d053a38d6d.ngrok.io';
+var ngrokLink = 'https://b8742e5590a2.ngrok.io';
 
 $(document).on("click", sendTimeToServer);
 
 async function sendTimeToServer() {
-    var time = new Date();
+    // Universal time in seconds
+    var time = new Date().valueOf() / 1000;
     const port = 4000;
     console.log('sendTimeToServer called');
     const response = await fetch(ngrokLink + '/ping', {
@@ -16,8 +18,9 @@ async function sendTimeToServer() {
         },
         body: JSON.stringify({
                 time: time,
-                time_diff : latency,
-                client_id : userId
+                delay : latency,
+                user_id : userId,
+                channel_id : channelId
             })
         })
         .then(data => {
@@ -32,9 +35,10 @@ async function sendTimeToServer() {
 window.Twitch.ext.onAuthorized(function(auth) {
         console.log('The user ID is', auth.userId);
         userId = auth.userId;
+        console.log('The channelId ID is', auth.channelId);
+        channelId = auth.channelId;
 });
 
 window.Twitch.ext.onContext(function(contextCallback) {
-        console.log('The hlsLatencyBroadcast is', contextCallback.hlsLatencyBroadcaster);
         latency = contextCallback.hlsLatencyBroadcaster;
     });
